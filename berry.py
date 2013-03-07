@@ -37,7 +37,7 @@ myRRD.update()
 
 
 from pyrrd.graph import DEF, CDEF, VDEF, LINE, AREA, GPRINT
-ef1 = DEF(rrdfile=myRRD.filename, vname='myspeed',
+def1 = DEF(rrdfile=myRRD.filename, vname='myspeed',
           dsName=dataSource.name)
 cdef1 = CDEF(vname='kmh', rpn='%s,3600,*' % def1.vname)
 cdef2 = CDEF(vname='fast', rpn='kmh,100,GT,kmh,0,IF')
