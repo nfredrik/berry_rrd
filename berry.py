@@ -10,3 +10,8 @@ roundRobinArchives.append(RRA(cf='AVERAGE', xff=0.5, steps=6, rows=10))
 myRRD = RRD(
 filename, ds=dataSources, rra=roundRobinArchives, start=920804400)
 myRRD.create()
+
+
+import os
+print os.path.isfile(filename)
+print len(open(filename).read())
