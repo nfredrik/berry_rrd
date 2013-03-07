@@ -37,7 +37,7 @@ def main(args):
     try:
         bahnhof = myFTP('privat.bahnhof.se', 'wb177225', '94e6a11d6')
         bahnhof.upload('index.html')
-        bahnhof.upload('/tmp/ rrdgraph.png')
+        bahnhof.upload('/tmp/rrdgraph.png')
         
     except:
         (exc_class, exc_object, exc_traceback) = sys.exc_info()
