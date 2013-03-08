@@ -1,7 +1,7 @@
 #!/usr/bin/python -tt
 
 import sys
-import Mail
+from Mail import Mail
 
 
 def main(args):
