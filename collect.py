@@ -7,7 +7,7 @@ FILE='cobolmodules.pkl'
 def write_2_file(dict):
     
     output = open(FILE, 'wb')
-    pickle.dump(dict, output)
+    pickle.dump(dict, output, -1)
     output.close()
 
 filename = 'test.rrd'
