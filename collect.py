@@ -1,5 +1,6 @@
 import os
 from pyrrd.rrd import DataSource,  RRA, RRD
+import pickle
 
 FILE='cobolmodules.pkl'
 

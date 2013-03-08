@@ -1,5 +1,6 @@
 from pyrrd.graph import DEF, CDEF, VDEF, LINE, AREA, GPRINT
 import sys
+import pickle
 
 FILE='cobolmodules.pkl'
 
