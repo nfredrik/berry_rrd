@@ -1,6 +1,14 @@
 import os
 from pyrrd.rrd import DataSource,  RRA, RRD
 
+FILE='cobolmodules.pkl'
+
+def write_2_file(dict):
+    
+    output = open(FILE, 'wb')
+    pickle.dump(dict, output)
+    output.close()
+
 filename = 'test.rrd'
 dataSources = []
 roundRobinArchives = []
@@ -28,6 +36,8 @@ myRRD.bufferValue('920808300', '12420')
 myRRD.bufferValue('920808600', '12422')
 myRRD.bufferValue('920808900', '12423')
 myRRD.update()
+
+write_2_file(dataSource)
 
 print os.path.isfile(filename)
 print len(open(filename).read())

@@ -1,9 +1,24 @@
 from pyrrd.graph import DEF, CDEF, VDEF, LINE, AREA, GPRINT
 import sys
 
+FILE='cobolmodules.pkl'
+
+def from_file():
+
+    if not os.path.exists(FILE):
+        return {}
+
+    pkl_file = open(FILE, 'rb')
+    the_dict = pickle.load(pkl_file)
+    pkl_file.close()
+    return the_dict
+
 def rrd_stuff():
         
     filename = 'test.rrd'
+    
+    dataSource = from_file()
+    
     
     def1 = DEF(rrdfile=filename, vname='myspeed',
               dsName=dataSource.name)
