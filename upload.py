@@ -1,4 +1,5 @@
 from pyrrd.graph import DEF, CDEF, VDEF, LINE, AREA, GPRINT
+import sys
 
 def rrd_stuff():
         
