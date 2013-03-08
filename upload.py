@@ -1,4 +1,7 @@
 from pyrrd.graph import DEF, CDEF, VDEF, LINE, AREA, GPRINT
+
+from bahnhof import bahnHof
+
 import sys
 import os
 import pickle
@@ -66,7 +69,7 @@ def main(args):
     rrd_stuff()
     
     try:
-        bahnhof = myFTP('privat.bahnhof.se', 'wb177225', '94e6a11d6')
+        bahnhof = bahnHof()
         bahnhof.upload('index.html')
         bahnhof.upload('rrdgraph.png')
         
