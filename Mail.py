@@ -11,16 +11,16 @@ class Mail(object):
         self.password = password
         self.server = smtplib.SMTP(servername, 587)
 
-    def send(self, msg):
+    def send(self, subject, message):
         # Create message 
-        msg = MIMEText('Test message from PyMOTW.')
+        msg = MIMEText(message)
         msg.set_unixfrom('author')
         msg['To'] = email.utils.formataddr(('Recipient', self.to_email))
         msg['From'] = email.utils.formataddr(('Author', 'author@example.com'))
-        msg['Subject'] = 'Test from PyMOTW'
+        msg['Subject'] = subject
 
         try:
-            self.server.set_debuglevel(True)
+            self.server.set_debuglevel(False)
 
             # identify ourselves, prompting server for supported features
             self.server.ehlo()
