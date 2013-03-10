@@ -49,8 +49,7 @@ def main(args):
         
         import random
         
-        myRRD = RRD(filename)
-        myRRD.bufferValue()    
+        myRRD = RRD(filename)    
         myRRD.bufferValue(time.time(), random.randrange(12393, 12423))
         
         #=======================================================================
