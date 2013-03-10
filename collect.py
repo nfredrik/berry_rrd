@@ -41,7 +41,7 @@ def main(args):
         
         myRRD = RRD(filename, ds=dataSources, rra=roundRobinArchives, start=920804400)
         myRRD.create()
-        myRRD.update()
+        #myRRD.update()
         #write_2_file(myRRD)
     
     else:
