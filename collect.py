@@ -41,12 +41,12 @@ def main(args):
         
         myRRD = RRD(filename, ds=dataSources, rra=roundRobinArchives, start=920804400)
         myRRD.create()
-        
-        write_2_file(myRRD)
+        myRRD.update()
+        #write_2_file(myRRD)
     
     else:
         
-        myRRD = from_file()
+        myRRD = RRD(filename)
             
         myRRD.bufferValue('920805600', '12363')
         myRRD.bufferValue('920805900', '12363')
@@ -64,7 +64,7 @@ def main(args):
         myRRD.bufferValue('920808900', '12423')
         myRRD.update()
         
-        write_2_file(myRRD)
+        #write_2_file(myRRD)
 
         print os.path.isfile(filename)
         print len(open(filename).read())
