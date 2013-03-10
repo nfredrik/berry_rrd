@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from pyrrd.rrd import DataSource,  RRA, RRD
 import pickle
 
@@ -49,8 +50,8 @@ def main(args):
         import random
         
         myRRD = RRD(filename)
-            
-        myRRD.bufferValue('N:', random.randrange(12393, 12423))
+        myRRD.bufferValue()    
+        myRRD.bufferValue(time.time(), random.randrange(12393, 12423))
         
         #=======================================================================
         # myRRD.bufferValue('920805900', '12363')
