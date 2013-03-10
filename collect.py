@@ -40,7 +40,7 @@ def main(args):
         roundRobinArchives.append(RRA(cf='AVERAGE', xff=0.5, steps=1, rows=24))
         roundRobinArchives.append(RRA(cf='AVERAGE', xff=0.5, steps=6, rows=10))
         
-        myRRD = RRD(filename, ds=dataSources, rra=roundRobinArchives, start=920804400)
+        myRRD = RRD(filename, ds=dataSources, rra=roundRobinArchives, start=time.time())
         myRRD.create()
         #myRRD.update()
         #write_2_file(myRRD)
