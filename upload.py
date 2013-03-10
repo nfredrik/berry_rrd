@@ -22,11 +22,14 @@ def rrd_stuff():
         
     filename = 'test.rrd'
     
-    dataSource = from_file()
+    #dataSource = from_file()
     
     
+    #def1 = DEF(rrdfile=filename, vname='myspeed',
+    #          dsName=dataSource.name)
     def1 = DEF(rrdfile=filename, vname='myspeed',
-              dsName=dataSource.name)
+              dsName='speed')
+    
     cdef1 = CDEF(vname='kmh', rpn='%s,3600,*' % def1.vname)
     cdef2 = CDEF(vname='fast', rpn='kmh,100,GT,kmh,0,IF')
     cdef3 = CDEF(vname='good', rpn='kmh,100,GT,0,kmh,IF')
