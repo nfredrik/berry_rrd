@@ -46,22 +46,27 @@ def main(args):
     
     else:
         
+        import random
+        
         myRRD = RRD(filename)
             
-        myRRD.bufferValue('920805600', '12363')
-        myRRD.bufferValue('920805900', '12363')
-        myRRD.bufferValue('920806200', '12373')
-        myRRD.bufferValue('920806500', '12383')
-        myRRD.update()
+        myRRD.bufferValue('N:', random.randrange(12393, 12423))
         
-        myRRD.bufferValue('920806800', '12393')
-        myRRD.bufferValue('920807100', '12399')
-        myRRD.bufferValue('920807400', '12405')
-        myRRD.bufferValue('920807700', '12411')
-        myRRD.bufferValue('920808000', '12415')
-        myRRD.bufferValue('920808300', '12420')
-        myRRD.bufferValue('920808600', '12422')
-        myRRD.bufferValue('920808900', '12423')
+        #=======================================================================
+        # myRRD.bufferValue('920805900', '12363')
+        # myRRD.bufferValue('920806200', '12373')
+        # myRRD.bufferValue('920806500', '12383')
+        # myRRD.update()
+        # 
+        # myRRD.bufferValue('920806800', '12393')
+        # myRRD.bufferValue('920807100', '12399')
+        # myRRD.bufferValue('920807400', '12405')
+        # myRRD.bufferValue('920807700', '12411')
+        # myRRD.bufferValue('920808000', '12415')
+        # myRRD.bufferValue('920808300', '12420')
+        # myRRD.bufferValue('920808600', '12422')
+        # myRRD.bufferValue('920808900', '12423')
+        #=======================================================================
         myRRD.update()
         
         #write_2_file(myRRD)
