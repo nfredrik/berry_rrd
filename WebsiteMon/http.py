@@ -45,4 +45,11 @@ def send(host):
         
         
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except:
+        from bahnhof import bahnHof
+        
+        bahnhof = bahnHof()
+        bahnhof.upload('index.html')
+            
