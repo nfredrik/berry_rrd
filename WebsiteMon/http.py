@@ -52,4 +52,4 @@ if __name__ == '__main__':
         
         bahnhof = bahnHof()
         bahnhof.upload('index.html')
-            
+        bahnhof.upload('rrdgraph.png')           
