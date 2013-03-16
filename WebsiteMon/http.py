@@ -17,7 +17,7 @@ rrd_file = 'test.rrd'
 
 report_interval = 60             
             
-def main(args):
+def main():
 
     LOG_FILENAME = 'rrdlogger'
     
@@ -79,13 +79,7 @@ def send(host):
         
         
 if __name__ == '__main__':
-    
-
-
-    try:
-        main()
-    except:
-        pass
+    main()
 
         
 
