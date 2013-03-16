@@ -4,8 +4,9 @@ import time
 import httplib
 from bahnhof import bahnHof
 
+# Todo: add logging feature, add mail everytime ftp is sent
 
-host = 'www.python.org'
+host = 'www.kaj63.se'
 path = '/'
 use_ssl = False
 
