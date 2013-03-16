@@ -45,7 +45,7 @@ def main():
             latency = ('%.3f' % raw_latency)
             my_rrd.update(latency)
             my_rrd.graph(60)
-            my_logger.debug('latency: %f'% latency)
+            my_logger.debug('latency')
 
         else:
             expire_time = interval
