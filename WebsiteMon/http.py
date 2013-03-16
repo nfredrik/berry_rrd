@@ -18,8 +18,17 @@ rrd_file = 'test.rrd'
 report_interval = 60             
             
 def main(args):
+
+    LOG_FILENAME = 'rrdlogger'
     
-    my_logger = args[0]
+    my_logger = logging.getLogger('rrdLogger')
+    my_logger.setLevel(logging.DEBUG)
+                        
+    handler = logging.handlers.RotatingFileHandler(LOG_FILENAME,
+                                               maxBytes=2048,
+                                               backupCount=5,
+                                               )
+    my_logger.addHandler(handler)    
                
     bahnhof = bahnHof()
     
@@ -71,21 +80,13 @@ def send(host):
         
 if __name__ == '__main__':
     
-    LOG_FILENAME = 'rrdlogger'
-    
-    my_logger = logging.getLogger('rrdLogger')
-    my_logger.setLevel(logging.DEBUG)
-                        
-    handler = logging.handlers.RotatingFileHandler(LOG_FILENAME,
-                                               maxBytes=2048,
-                                               backupCount=5,
-                                               )
-    my_logger.addHandler(handler)
+
 
     try:
-        main(my_logger)
+        main()
     except:
-        my_logger.debug('exception!')
+        pass
+
         
 
            
