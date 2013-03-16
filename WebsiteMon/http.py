@@ -2,6 +2,7 @@
 import rrd
 import time
 import httplib
+from bahnhof import bahnHof
 
 
 host = 'www.python.org'
@@ -10,9 +11,13 @@ use_ssl = False
 
 interval = 10
 rrd_file = 'test.rrd'
+
+report_interval = 60 * 60            
             
-            
-def main():            
+def main():           
+    bahnhof = bahnHof()
+    report_time = time.time() + report_interval
+     
     my_rrd = rrd.RRD(rrd_file, 'Response Time')
     while True:   
         start_time = time.time()
@@ -29,7 +34,14 @@ def main():
         if expire_time > 0:
             time.sleep(expire_time)
                 
-
+                
+        if report_time < start_time:
+            
+            report_time = time.time() + report_interval
+            bahnhof.upload('index.html')
+            bahnhof.upload('test.rrd.png')  
+            
+           
 def send(host):
     if use_ssl:
         conn = httplib.HTTPSConnection(host)
@@ -48,8 +60,7 @@ if __name__ == '__main__':
     try:
         main()
     except:
-        from bahnhof import bahnHof
+
         
-        bahnhof = bahnHof()
-        bahnhof.upload('index.html')
-        bahnhof.upload('test.rrd.png')           
+
+           
