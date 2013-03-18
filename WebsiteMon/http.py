@@ -15,7 +15,7 @@ use_ssl = False
 interval = 10
 rrd_file = 'test.rrd'
 
-report_interval = 60             
+report_interval = 60 * 60             
             
 def main():
 
@@ -63,7 +63,7 @@ def main():
                 my_logger.debug('uploaded the suff')
                 my_logger.info('Uploaded info...')
             except:
-                my_logger.debug('failed to upload the suff')              
+                my_logger.debug('failed to upload the stuff')              
            
 def send(host):
     if use_ssl:
