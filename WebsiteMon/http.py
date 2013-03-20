@@ -8,7 +8,7 @@ from bahnhof import bahnHof
 
 # Todo: add logging feature, add mail everytime ftp is sent
 
-host = 'www.kaj63.se'
+host = 'www.microsoft.com'
 path = '/'
 use_ssl = False
 
