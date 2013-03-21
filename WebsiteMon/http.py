@@ -15,7 +15,7 @@ use_ssl = False
 interval = 10
 rrd_file = 'test.rrd'
 
-report_interval = 60 * 60             
+report_interval = 60              
             
 def main():
 
@@ -57,13 +57,13 @@ def main():
         if report_time < start_time:
             
             report_time = time.time() + report_interval
-            try:
-                bahnhof.upload('index.html')
-                bahnhof.upload('test.rrd.png')  
-                my_logger.debug('uploaded the suff')
-                my_logger.info('Uploaded info...')
-            except:
-                my_logger.debug('failed to upload the stuff')              
+            #try:
+            bahnhof.upload('index.html')
+            bahnhof.upload('test.rrd.png')  
+            my_logger.debug('uploaded the suff')
+            my_logger.info('Uploaded info...')
+            #except:
+            #    my_logger.debug('failed to upload the stuff')              
            
 def send(host):
     if use_ssl:
