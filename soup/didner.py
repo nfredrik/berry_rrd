@@ -4,6 +4,8 @@ url="http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P00000F01&progr
 page=urllib2.urlopen(url)
 #print page.read()
 soup = BeautifulSoup(page.read())
+print soup.prettify(encoding)
+
 universities=soup.findAll('table',{'class':'"alternatedtoplist halftoplist'})
 #universities=soup.findAll('a',class_='institution')
 #universities=soup.findAll('A',{'CLASS':'institution'})
