@@ -5,16 +5,13 @@ import urllib2
 import json
 import pickle
 import os
+import re
+
 # Constants
 FILE='yesterday.pickle'
-
 OMX_20130329=375.35
 DIDNER_SVERIGE_20130229=1455.04
 RELATION_OMX_DIDNER_20130229=DIDNER_SVERIGE_20130229/OMX_20130329
-
-OMX_YESTERDAY=385.35
-DIDNER_SVERIGE_YESTERDAY=1455.04
-RELATION_OMX_DIDNER_YESTERDAY=DIDNER_SVERIGE_YESTERDAY/OMX_YESTERDAY
 
 
 # Save values from today
@@ -36,16 +33,18 @@ def from_file():
     pkl_file.close()
     return the_dict
 
-obj = dict()
+obj = {}
 
 if os.path.exists(FILE):
     obj = from_file()
 else:
-    obj = {OMX_YESTERDAY:380.35, DIDNER_SVERIGE_YESTERDAY:1451.04}
+    print type(obj)
+    obj['OMX_YESTERDAY'] = 380.35
+    obj['DIDNER_SVERIGE_YESTERDAY'] = 1451.04
     write_2_file(obj)
     
     
-RELATION_OMX_DIDNER_YESTERDAY = obj[DIDNER_SVERIGE_YESTERDAY]/obj[OMX_YESTERDAY]
+RELATION_OMX_DIDNER_YESTERDAY = obj['DIDNER_SVERIGE_YESTERDAY']/obj['OMX_YESTERDAY']
 
 dgstor = "http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P00000F01&programid=0000000000"
 # dgliten ="0P0000IWH7"
@@ -53,8 +52,8 @@ dgstor = "http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P00000F01&
 
 sum= ""
 sum+='-'*50 +'\n'
-sum+="Didner yesterday:%.2f"%obj[DIDNER_SVERIGE_YESTERDAY]+'\n'
-sum+="OMX yesterday:%.2f"%obj[OMX_YESTERDAY]+'\n'
+sum+="Didner yesterday:%.2f"%obj['DIDNER_SVERIGE_YESTERDAY']+'\n'
+sum+="OMX yesterday:%.2f"%obj['OMX_YESTERDAY']+'\n'
 
 
 
@@ -67,17 +66,12 @@ sum+="OMX yesterday:%.2f"%obj[OMX_YESTERDAY]+'\n'
 page=urllib2.urlopen("http://svt.se/svttext/web/pages/202.html")
 soup = BeautifulSoup(page.read())
 OMX=soup.findAll("span", {"class" : "Y DH"})
-import re
+
 
 
 filter = re.search(r"([\d]+\.[\d]+)", OMX[1].text) 
 if filter != None:
-    #sum+='OMX today:%s\n'% filter.group(0)
     omx_now = float(filter.group(0))
-
-    
-
-
 
 #
 #  Read didner & gerge from morningstar
@@ -89,28 +83,26 @@ soup = BeautifulSoup(page.read())
 didner=soup.find("table", {"class" : "alternatedtoplist halftoplist"})
 didner_float = float(didner.findAll('td')[1].text.replace(' ','').replace(',','.').replace('SEK',''))
 
-sum+= 'Didner compared to OMX from yesterday:%.2f'%(((didner_float/omx_now/RELATION_OMX_DIDNER_YESTERDAY)-1)*100)+'%\n'
 
 sum+='-'*50 +'\n'
 sum+="Didner course today: %.2f\n"% didner_float
 sum+="OMX today: %.2f\n"% omx_now    
 #print 'Difference from 2013039: %.2f'%(((didner_float/omx_now/RELATION_OMX_DIDNER_20130229)-1)*100),'%'
 sum+='Didner compared to OMX from 20130329: %.2f'%(((didner_float/omx_now/RELATION_OMX_DIDNER_20130229)-1)*100) + '%\n'
+sum+= 'Didner compared to OMX from yesterday:%.2f'%(((didner_float/omx_now/RELATION_OMX_DIDNER_YESTERDAY)-1)*100)+'%\n'
 
 
-
-
-
-
-obj[OMX_YESTERDAY]=omx_now
-obj[DIDNER_SVERIGE_YESTERDAY] =didner_float
+#
+# Save todays metrics
+#
+obj['OMX_YESTERDAY'] = omx_now
+obj['DIDNER_SVERIGE_YESTERDAY'] = didner_float
 
 write_2_file(obj)
 
 
 #print '---Printing sum---'
-print sum
+# print sum
 
-mail = Mail('fredrik.svard@gmail.com', 'frsv.linux@gmail.com', 'hoppa2lo', 'smtp.gmail.com')
-    
+mail = Mail('fredrik.svard@gmail.com', 'frsv.linux@gmail.com', 'hoppa2lo', 'smtp.gmail.com')  
 mail.send('Didner och OMX', sum,[])
