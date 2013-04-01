@@ -1,6 +1,7 @@
 import smtplib
 import email.utils
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 import getpass
 
 class Mail(object):
