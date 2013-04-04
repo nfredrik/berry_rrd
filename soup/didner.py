@@ -115,9 +115,9 @@ sum+="OMX yesterday:%.2f"%obj['OMX_YESTERDAY']+'\n'
 
 page=urllib2.urlopen("http://svt.se/svttext/web/pages/202.html")
 soup = BeautifulSoup(page.read())
-OMX=soup.findAll("span", {"class" : "Y DH"})
+OMX=soup.findAll("span", {"class" : "C DH"})
 
-
+# print 'OMX:', OMX
 
 filter = re.search(r"([\d]+\.[\d]+)", OMX[1].text) 
 if filter != None:
